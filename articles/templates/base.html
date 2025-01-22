@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Zamonaviy Dasturchi{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="page-container">
+    <div class="content-wrap">
+        {% include 'includes/header.html' %}
+        {% include 'includes/navbar.html' %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% include 'includes/footer.html' %}
+
+    <button id="mode-toggle">Tungi rejim</button>
+
+    <script src="{% static 'js/nice.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Zamonaviy Dasturchi{% endblock %}
+
+{% block content %}
+    <main>
+        <section class="article-list">
+            {% for article in articles %}
+                <article class="post">
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}">
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.content|truncatewords:30 }}</p>
+
+                    <a href="{% if article.slug %}{% url 'articles:blog_detail' article.created_at.year article.created_at.month article.created_at.day article.slug %}{% else %}# {% endif %}" class="read-more">Batafsil o'qish</a>
+
+                    <!-- Delete button -->
+                    <form action="{% url 'articles:article_delete' article.pk %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn" onclick="return confirm('Siz haqiqatan ham bu maqolani o\'chirmoqchimisiz?')">Delete</button>
+                    </form>
+                </article>
+            {% empty %}
+                <p>Hozircha maqolalar mavjud emas.</p>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}
